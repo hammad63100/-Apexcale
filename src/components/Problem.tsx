@@ -1,5 +1,6 @@
 import { Reveal } from './Reveal';
 import { BoxIcon, CoinsIcon, TrendDownIcon } from './icons';
+import problemImg from '../assets/images/problem.jpg';
 
 export function Problem() {
   return (
@@ -44,7 +45,7 @@ export function Problem() {
         <Reveal variant="right" className="split-media media-frame">
           <div className="frame">
             <img
-              src="/img/problem.jpg"
+              src={problemImg}
               alt="Busy e-commerce fulfillment warehouse stacked with packages"
               loading="lazy"
             />

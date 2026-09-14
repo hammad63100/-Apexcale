@@ -13,6 +13,7 @@ import {
   StarIcon,
   TrendUpIcon,
 } from './icons';
+import heroImg from '../assets/images/hero.jpg';
 
 function SparkBars() {
   return (
@@ -117,7 +118,7 @@ function HeroScene() {
         </div>
 
         <div className="img-card" data-depth="40">
-          <img src="/img/hero.jpg" alt="E-commerce shopping and online payment" loading="eager" />
+          <img src={heroImg} alt="E-commerce shopping and online payment" loading="eager" />
         </div>
 
         <div className="chip chip-buy" data-depth="95">

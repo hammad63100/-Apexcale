@@ -3,6 +3,9 @@ import { Reveal } from './Reveal';
 import { Tilt } from './Tilt';
 import { Icon } from './icons';
 
+import whyFeaturedImg from '../assets/images/One Accountable Team, Every Marketplace..jpg.jpeg';
+import whyTeamImg from '../assets/images/why.jpg';
+
 export function Why() {
   return (
     <section
@@ -26,8 +29,11 @@ export function Why() {
             f.featured ? (
               <Reveal key={f.title} variant="left" className="why-featured">
                 <img
-                  src="/img/why.jpg"
-                  alt="Dedicated Apexcale team collaborating on a growth strategy"
+                  src={whyFeaturedImg || whyTeamImg}
+                  alt={f.title}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = whyTeamImg;
+                  }}
                   loading="lazy"
                 />
                 <div className="w-body">

@@ -9,6 +9,7 @@ import auditImg from '../assets/images/Account & Market Audit.jpg.jpeg';
 import strategyImg from '../assets/images/custom growth strategy.jpg.jpeg';
 import executionImg from '../assets/images/Execution & Continuous Optimization.jpg.jpeg';
 import reportingImg from '../assets/images/Transparent Reporting & Strategic Review.jpg.jpeg';
+import processMainImg from '../assets/images/process.jpg';
 
 const processImages: Record<string, string> = {
   '1': discoveryImg,
@@ -45,7 +46,7 @@ export function Process() {
           <Reveal variant="right" className="media-frame process-media">
             <div className="frame">
               <img
-                src="/img/process.jpg"
+                src={processMainImg}
                 alt="Apexcale strategist reviewing account performance data"
                 loading="lazy"
               />
