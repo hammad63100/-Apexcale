@@ -37,6 +37,7 @@ export interface ServiceDetailItem {
     stepNum: string;
     title: string;
     description: string;
+    icon?: IconName;
   }[];
   deliverables: string[];
   keyBenefits: string[];
@@ -111,24 +112,28 @@ export const detailedServices: ServiceDetailItem[] = [
         title: 'Niche Discovery & Market Audit',
         description:
           'Deep-dive scan across high-growth subcategories, monitoring consumer search shifts, keyword velocity, and emerging market gaps.',
+        icon: 'searchTrend',
       },
       {
         stepNum: '02',
         title: 'Competitor & Margin Modeling',
         description:
           'Detailed unit economics, supplier benchmark pricing, shipping logistics, and Amazon fee structure modeling.',
+        icon: 'barChart',
       },
       {
         stepNum: '03',
         title: 'Product Differentiation Strategy',
         description:
           'Formulating custom product improvements, bundle angles, and patent/IP clearance checks to establish competitive moats.',
+        icon: 'target',
       },
       {
         stepNum: '04',
         title: 'Go-To-Market Feasibility Report',
         description:
           'Actionable executive summary detailing pricing strategy, launch ad budget, initial MOQ guidance, and timeline expectations.',
+        icon: 'rocket',
       },
     ],
     deliverables: [
@@ -362,19 +367,19 @@ export const detailedServices: ServiceDetailItem[] = [
     slug: 'amazon-ppc-advertising',
     num: '04',
     title: 'Amazon PPC & Advertising Management',
-    tagline: 'Profit-Driven Ad Campaigns Built for Compounding Organic Rank & Low TACoS',
+    tagline: 'Profit-Driven Ad Campaigns Built for Compounding Organic Rank & Low TACOS',
     category: 'Performance Advertising & Scale',
     gradient: 'g4',
     icon: 'megaphone',
     image: ppcImg,
     shortDesc:
-      'We plan, launch, and manage Sponsored Products, Brands, and Display campaigns built around real performance targets — optimizing for ACoS and TACoS rather than vanity clicks.',
+      'We plan, launch, and manage Sponsored Products, Brands, and Display campaigns built around real performance targets — optimizing for ACOS and TACOS rather than vanity clicks.',
     heroLead:
       'Ad spend should compound into organic rank, not evaporate into inflated cost-per-click. We restructure your campaign architecture, conduct daily negative harvesting, and deploy algorithmic bid management that maximizes net profit.',
     highlights: [
       'Granular Single-Keyword Campaigns',
       'Continuous Negative Harvesting',
-      'TACoS & Net Profit Focus',
+      'TACOS & Net Profit Focus',
       'Placement & Dayparting Tuning',
     ],
     whyChoose: [
@@ -397,16 +402,16 @@ export const detailedServices: ServiceDetailItem[] = [
         icon: 'refreshCw',
       },
       {
-        title: 'Advanced Analytics & TACoS Control',
+        title: 'Advanced Analytics & TACOS Control',
         description:
-          'Transparent executive dashboards tracking organic ranking correlation, Blended TACoS, ROAS, and bottom-line gross profit.',
+          'Transparent executive dashboards tracking organic ranking correlation, Blended TACOS, ROAS, and bottom-line gross profit.',
         icon: 'barChart',
       },
     ],
     stats: [
       {
         value: '71%',
-        label: 'Average ACoS Reduction',
+        label: 'Average ACOS Reduction',
         subtext: 'Across optimized client accounts',
       },
       {
@@ -443,7 +448,7 @@ export const detailedServices: ServiceDetailItem[] = [
         stepNum: '04',
         title: 'Reporting & Scaling Winning ASINs',
         description:
-          'Transparent weekly reporting on TACoS, share of voice, organic rank compounding, and scale opportunities into Sponsored Display and DSP.',
+          'Transparent weekly reporting on TACOS, share of voice, organic rank compounding, and scale opportunities into Sponsored Display and DSP.',
       },
     ],
     deliverables: [
@@ -453,7 +458,7 @@ export const detailedServices: ServiceDetailItem[] = [
       'Top-of-Search & Product Page Placement Multiplier Calibration',
       'Sponsored Brands & Sponsored Brand Video Creative Alignment',
       'Sponsored Display Retargeting & Category Conquesting Setup',
-      'Live Cloud Analytics Dashboard with ACoS, TACoS & ROAS KPIs',
+      'Live Cloud Analytics Dashboard with ACOS, TACOS & ROAS KPIs',
       'Bi-Weekly Strategic Strategy Calls with Senior Media Buyers',
     ],
     keyBenefits: [

@@ -144,7 +144,7 @@ function HeroScene() {
             <ChartLineIcon size={16} />
           </span>
           <span>
-            ACoS <span className="down">↓ 38%</span> <small>while scaling</small>
+            ACOS <span className="down">↓ 38%</span> <small>while scaling</small>
           </span>
         </div>
 

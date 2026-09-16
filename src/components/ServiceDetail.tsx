@@ -17,6 +17,7 @@ import {
   ShieldCheckIcon,
   SparkleIcon,
   StarIcon,
+  type IconName,
 } from './icons';
 
 interface ServiceDetailProps {
@@ -198,20 +199,34 @@ export function ServiceDetail({ slug }: ServiceDetailProps) {
           </div>
 
           <div className="svc-why-grid">
-            {service.whyChoose.map((item, idx) => (
-              <Reveal key={item.title} variant="up" delay={idx * 80}>
-                <div className="svc-why-card">
-                  <div className="svc-why-top">
-                    <span className="svc-why-icon">
-                      <Icon name={item.icon} size={22} />
-                    </span>
-                    <span className="svc-why-num">0{idx + 1}</span>
+            {service.whyChoose.map((item, idx) => {
+              const numStr = `0${idx + 1}`;
+              return (
+                <Reveal key={item.title} variant="up" delay={idx * 80}>
+                  <div className="svc-roadmap-card svc-why-card">
+                    {/* Corner Icon - Touches exact top-left corner */}
+                    <div className="svc-roadmap-corner-icon">
+                      <Icon name={item.icon} size={20} />
+                    </div>
+
+                    {/* Number in Background (Watermark) */}
+                    <div className="svc-roadmap-bg-num" aria-hidden="true">
+                      {numStr}
+                    </div>
+
+                    {/* Card Content */}
+                    <div className="svc-roadmap-content">
+                      <div className="svc-roadmap-step-badge">
+                        <span className="svc-roadmap-step-dot" />
+                        <span>Advantage {numStr}</span>
+                      </div>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
+                    </div>
                   </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -285,19 +300,35 @@ export function ServiceDetail({ slug }: ServiceDetailProps) {
           </div>
 
           <div className="svc-roadmap-grid">
-            {service.processSteps.map((step, idx) => (
-              <Reveal key={step.stepNum} variant="up" delay={idx * 100}>
-                <div className="svc-roadmap-card">
-                  <div className="svc-roadmap-num-pill">
-                    <span>{step.stepNum}</span>
+            {service.processSteps.map((step, idx) => {
+              const defaultIcons: IconName[] = ['searchTrend', 'barChart', 'target', 'rocket'];
+              const iconName = step.icon || defaultIcons[idx % defaultIcons.length];
+              return (
+                <Reveal key={step.stepNum} variant="up" delay={idx * 100}>
+                  <div className="svc-roadmap-card">
+                    {/* Corner Icon - Touches exact top-left corner */}
+                    <div className="svc-roadmap-corner-icon">
+                      <Icon name={iconName} size={20} />
+                    </div>
+
+                    {/* Step Number in Background (Watermark) */}
+                    <div className="svc-roadmap-bg-num" aria-hidden="true">
+                      {step.stepNum}
+                    </div>
+
+                    {/* Card Content */}
+                    <div className="svc-roadmap-content">
+                      <div className="svc-roadmap-step-badge">
+                        <span className="svc-roadmap-step-dot" />
+                        <span>Phase {step.stepNum}</span>
+                      </div>
+                      <h3>{step.title}</h3>
+                      <p>{step.description}</p>
+                    </div>
                   </div>
-                  <div className="svc-roadmap-content">
-                    <h3>{step.title}</h3>
-                    <p>{step.description}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

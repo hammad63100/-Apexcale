@@ -89,7 +89,7 @@ export const services: Service[] = [
   {
     icon: 'megaphone',
     title: 'Amazon PPC & Advertising Management',
-    text: 'We plan, launch, and manage Sponsored Products, Sponsored Brands, and Sponsored Display campaigns built around real performance targets — not just impressions and clicks. Our team structures campaigns around keyword intent, competitive bidding strategy, and dayparting, with continuous optimization based on ACoS and TACoS rather than surface-level metrics. The result: ad spend that compounds into organic rank instead of disappearing into inflated cost-per-click.',
+    text: 'We plan, launch, and manage Sponsored Products, Sponsored Brands, and Sponsored Display campaigns built around real performance targets — not just impressions and clicks. Our team structures campaigns around keyword intent, competitive bidding strategy, and dayparting, with continuous optimization based on ACOS and TACOS rather than surface-level metrics. The result: ad spend that compounds into organic rank instead of disappearing into inflated cost-per-click.',
     gradient: 'g4',
     num: '04',
   },
@@ -248,6 +248,11 @@ export const counters: Counter[] = [
 
 export interface ResultFeat {
   icon: IconName;
+  title: string;
+  tagline: string;
+  desc: string;
+  badge: string;
+  highlights: string[];
   text: string;
   gradient: 'g1' | 'g2' | 'g3' | 'g4';
 }
@@ -255,21 +260,41 @@ export interface ResultFeat {
 export const resultFeats: ResultFeat[] = [
   {
     icon: 'globe',
+    title: 'Multi-Marketplace Management',
+    tagline: 'Cross-Border Channel Scale',
+    desc: 'Unified marketplace orchestration across Amazon, Walmart, and global regions under one cohesive roadmap to eliminate channel conflict.',
+    badge: '10+ Marketplaces',
+    highlights: ['Amazon US & EU', 'Walmart Marketplace', 'Unified Inventory Sync'],
     text: 'Multi-marketplace management across Amazon, Walmart, and other major global platforms, coordinated under one strategy',
     gradient: 'g1',
   },
   {
     icon: 'coins',
-    text: 'Profit-first advertising, built around sustainable ACoS and TACoS targets rather than vanity impression metrics',
+    title: 'Profit-First Advertising',
+    tagline: 'Sustainable ACOS & TACOS',
+    desc: 'Campaign architectures engineered strictly around bottom-line profit and organic keyword rank velocity rather than vanity click spikes.',
+    badge: 'Sub-15% Target TACOS',
+    highlights: ['Negative Bid Pruning', 'Top-of-Search Multipliers', 'Organic Rank Flywheel'],
+    text: 'Profit-first advertising, built around sustainable ACOS and TACOS targets rather than vanity impression metrics',
     gradient: 'g2',
   },
   {
     icon: 'activity',
+    title: 'Proactive Account Health',
+    tagline: '24/7 Listing & Asset Defense',
+    desc: 'Continuous real-time monitoring to protect your rankings, Buy Box ownership, inventory thresholds, and listing status before bot flags hit sales.',
+    badge: '99.9% Buy Box Defense',
+    highlights: ['Suppression Shield', 'Sentiment Monitoring', 'Policy Compliance'],
     text: 'Proactive account health monitoring to protect your rankings, your Buy Box share, and your listing status',
     gradient: 'g3',
   },
   {
     icon: 'award',
+    title: 'Dedicated Senior Strategists',
+    tagline: 'Partner-Level Account Care',
+    desc: 'Your brand is guided directly by veteran e-commerce strategists with years of deep marketplace domain expertise — no junior account handoffs.',
+    badge: 'Zero Junior Handoffs',
+    highlights: ['Category Veterans', 'Strategic Weekly Syncs', 'Direct Senior Access'],
     text: 'Dedicated senior strategists, providing consistent, informed account oversight rather than rotating account managers',
     gradient: 'g4',
   },
