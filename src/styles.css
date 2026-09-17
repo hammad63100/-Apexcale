@@ -5069,6 +5069,46 @@ section[id] {
   mask-image: radial-gradient(900px 500px at 50% 30%, #000, transparent 80%);
 }
 
+/* Subtle Transparent Chart Watermark Background (Case Study 2 First Image) */
+.cs-section-watermark {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cs-watermark-image {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1440px;
+  height: auto;
+  min-height: 820px;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.085;
+  filter: saturate(1.15) contrast(1.05);
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, #000 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, #000 20%, transparent 80%);
+}
+
+.cs-watermark-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(900px 500px at 50% 20%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.82) 65%, #ffffff 100%),
+    linear-gradient(to bottom, #ffffff 0%, transparent 10%, transparent 90%, #ffffff 100%);
+  pointer-events: none;
+}
+
+.cs-section-container {
+  position: relative;
+  z-index: 2;
+}
+
 .case-studies-section .eyebrow {
   display: inline-flex;
   align-items: center;

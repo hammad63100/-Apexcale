@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { caseStudies } from '../data/caseStudiesData';
 import { useRouter } from '../context/RouterContext';
+import cs2WatermarkImg from '../assets/images/Case study 2.jpg.jpeg';
 import { Reveal } from './Reveal';
 import {
   ArrowRightIcon,
@@ -37,7 +38,18 @@ export function CaseStudies() {
 
   return (
     <section className="section case-studies-section" id="case-studies">
-      <div className="container">
+      {/* Subtle Transparent Case Study 2 Chart Watermark Background */}
+      <div className="cs-section-watermark" aria-hidden="true">
+        <img
+          src={cs2WatermarkImg}
+          alt=""
+          className="cs-watermark-image"
+          loading="lazy"
+        />
+        <div className="cs-watermark-overlay" />
+      </div>
+
+      <div className="container cs-section-container">
         {/* Section Header */}
         <div className="section-head center">
           <Reveal variant="up">
