@@ -150,7 +150,7 @@ export function CaseStudies() {
                           <SparkleIcon size={12} /> Proof Charts ({cs.images.length})
                         </span>
                         <div className="cs-tabs-buttons">
-                          {cs.images.map((img, iIdx) => (
+                          {cs.images.map((_, iIdx) => (
                             <button
                               key={iIdx}
                               type="button"
