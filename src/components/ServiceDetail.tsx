@@ -1,6 +1,6 @@
-import { useState, type FormEvent } from 'react';
 import { detailedServices, getServiceBySlug } from '../data/servicesData';
 import { useRouter } from '../context/RouterContext';
+import { FinalCta } from './FinalCta';
 import { Reveal } from './Reveal';
 import {
   ArrowLeftIcon,
@@ -11,9 +11,6 @@ import {
   CheckIcon,
   GlobeIcon,
   Icon,
-  MailIcon,
-  PhoneIcon,
-  SendIcon,
   ShieldCheckIcon,
   SparkleIcon,
   StarIcon,
@@ -28,23 +25,8 @@ export function ServiceDetail({ slug }: ServiceDetailProps) {
   const { navigate } = useRouter();
   const service = getServiceBySlug(slug) || detailedServices[0];
 
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    storeUrl: '',
-    monthlyRevenue: '',
-    message: '',
-  });
-
-  const handleFormSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-  };
-
   const scrollToContact = () => {
-    const el = document.getElementById('service-consultation');
+    const el = document.getElementById('cta');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -439,139 +421,6 @@ export function ServiceDetail({ slug }: ServiceDetailProps) {
         </div>
       </section>
 
-      {/* ---------------- Dedicated Consultation / Inquiry Form ---------------- */}
-      <section className="section svc-consult-form-section" id="service-consultation">
-        <div className="container">
-          <div className="svc-form-wrapper">
-            <div className="section-head center">
-              <span className="eyebrow">Direct Consultation</span>
-              <h2 className="h2">
-                Let’s Discuss Your <span className="grad-text-blue">{service.title}</span> Goals
-              </h2>
-              <p className="lead" style={{ maxWidth: 640, marginInline: 'auto' }}>
-                Fill out the quick form below and our senior marketplace director will prepare a tailored audit for your brand within 24 hours.
-              </p>
-            </div>
-
-            {formSubmitted ? (
-              <div className="svc-form-success">
-                <div className="success-icon-box">
-                  <CheckCircleIcon size={48} />
-                </div>
-                <h3>Strategy Request Received!</h3>
-                <p>
-                  Thank you for reaching out regarding <strong>{service.title}</strong>. Our senior strategists are reviewing your catalog and will be in touch shortly.
-                </p>
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-sm"
-                  onClick={() => setFormSubmitted(false)}
-                >
-                  Send Another Inquiry
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="svc-direct-form">
-                <div className="svc-form-grid">
-                  <div className="form-group">
-                    <label htmlFor="svc-name">Your Full Name *</label>
-                    <input
-                      id="svc-name"
-                      type="text"
-                      required
-                      placeholder="e.g. Sarah Jenkins"
-                      value={formData.fullName}
-                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="svc-email">Business Email *</label>
-                    <input
-                      id="svc-email"
-                      type="email"
-                      required
-                      placeholder="e.g. sarah@yourbrand.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="svc-phone">Phone / WhatsApp</label>
-                    <input
-                      id="svc-phone"
-                      type="tel"
-                      placeholder="0348 5035847"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="svc-store">Storefront or Primary ASIN Link</label>
-                    <input
-                      id="svc-store"
-                      type="text"
-                      placeholder="e.g. amazon.com/dp/B0XXXXXXXX"
-                      value={formData.storeUrl}
-                      onChange={(e) => setFormData({ ...formData, storeUrl: e.target.value })}
-                    />
-                  </div>
-
-                  <div className="form-group full-width">
-                    <label htmlFor="svc-rev">Current Monthly Revenue</label>
-                    <select
-                      id="svc-rev"
-                      value={formData.monthlyRevenue}
-                      onChange={(e) => setFormData({ ...formData, monthlyRevenue: e.target.value })}
-                    >
-                      <option value="">Select Monthly Revenue Range</option>
-                      <option value="launch">Pre-Launch / Just Starting</option>
-                      <option value="10k-50k">$10,000 – $50,000 / mo</option>
-                      <option value="50k-150k">$50,000 – $150,000 / mo</option>
-                      <option value="150k-500k">$150,000 – $500,000 / mo</option>
-                      <option value="500k+">$500,000+ / mo</option>
-                    </select>
-                  </div>
-
-                  <div className="form-group full-width">
-                    <label htmlFor="svc-msg">Specific Questions or Challenges</label>
-                    <textarea
-                      id="svc-msg"
-                      rows={4}
-                      placeholder={`Tell us what you are looking to achieve with ${service.title}...`}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    />
-                  </div>
-                </div>
-
-                <div className="svc-form-submit-row">
-                  <button type="submit" className="btn btn-primary btn-lg svc-submit-btn">
-                    <span>Submit Consultation Request</span>
-                    <SendIcon size={16} />
-                  </button>
-                  <span className="form-guarantee">
-                    <ShieldCheckIcon size={14} /> 100% Confidential. NDA upon request.
-                  </span>
-                </div>
-              </form>
-            )}
-
-            {/* Direct Contact Channels */}
-            <div className="svc-contact-strip">
-              <a href="mailto:Apexcale786@gmail.com" className="svc-contact-item">
-                <MailIcon size={16} /> <span>Apexcale786@gmail.com</span>
-              </a>
-              <a href="tel:03485035847" className="svc-contact-item">
-                <PhoneIcon size={16} /> <span>0348 5035847</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ---------------- Explore Other Services ---------------- */}
       <section className="section svc-other-services-section">
         <div className="container">
@@ -621,6 +470,10 @@ export function ServiceDetail({ slug }: ServiceDetailProps) {
           </div>
         </div>
       </section>
+
+      {/* ---------------- Unified Main Contact Section ---------------- */}
+      <FinalCta defaultService={service.slug} />
+
     </div>
   );
 }

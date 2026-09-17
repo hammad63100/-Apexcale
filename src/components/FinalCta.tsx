@@ -3,14 +3,18 @@ import { detailedServices } from '../data/servicesData';
 import { Reveal } from './Reveal';
 import { CheckCircleIcon, MailIcon, PhoneIcon, PinIcon, SendIcon } from './icons';
 
-export function FinalCta() {
+interface FinalCtaProps {
+  defaultService?: string;
+}
+
+export function FinalCta({ defaultService }: FinalCtaProps = {}) {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
     company: '',
-    service: '',
+    service: defaultService || '',
     message: '',
   });
 

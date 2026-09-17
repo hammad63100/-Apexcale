@@ -57,6 +57,12 @@ export const CheckIcon = (p: P) => (
   </Svg>
 );
 
+export const ChevronDownIcon = (p: P) => (
+  <Svg {...p}>
+    <path d="m6 9 6 6 6-6" strokeWidth={2.2} />
+  </Svg>
+);
+
 export const PlusIcon = (p: P) => (
   <Svg {...p}>
     <path d="M12 5v14M5 12h14" strokeWidth={2.2} />

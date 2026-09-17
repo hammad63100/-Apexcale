@@ -10,15 +10,17 @@ import { Problem } from './components/Problem';
 import { Process } from './components/Process';
 import { QuoteBand } from './components/QuoteBand';
 import { Results } from './components/Results';
+import { CaseStudies } from './components/CaseStudies';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Services } from './components/Services';
 import { ServiceDetail } from './components/ServiceDetail';
+import { CaseStudyDetail } from './components/CaseStudyDetail';
 import { Testimonials } from './components/Testimonials';
 import { ToTop } from './components/ToTop';
 import { Why } from './components/Why';
 
 function MainLayout() {
-  const { serviceSlug } = useRouter();
+  const { serviceSlug, caseStudyId } = useRouter();
 
   return (
     <>
@@ -28,6 +30,8 @@ function MainLayout() {
       <main id="main-content">
         {serviceSlug ? (
           <ServiceDetail slug={serviceSlug} />
+        ) : caseStudyId ? (
+          <CaseStudyDetail id={caseStudyId} />
         ) : (
           <>
             <Hero />
@@ -38,6 +42,7 @@ function MainLayout() {
             <Why />
             <Process />
             <Results />
+            <CaseStudies />
             <Testimonials />
             <Faq />
             <FinalCta />
