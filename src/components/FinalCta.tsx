@@ -1,14 +1,26 @@
 import { useState, type FormEvent } from 'react';
 import { detailedServices } from '../data/servicesData';
 import { Reveal } from './Reveal';
-import { CheckCircleIcon, MailIcon, PhoneIcon, PinIcon, SendIcon } from './icons';
+import {
+  AlertCircleIcon,
+  CheckCircleIcon,
+  MailIcon,
+  PhoneIcon,
+  PinIcon,
+  SendIcon,
+  SpinnerIcon,
+} from './icons';
 
 interface FinalCtaProps {
   defaultService?: string;
 }
 
 export function FinalCta({ defaultService }: FinalCtaProps = {}) {
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [botcheck, setBotcheck] = useState(false);
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -18,10 +30,93 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
     message: '',
   });
 
-  const handleSubmit = (e: FormEvent) => {
+  // Keep track of submitted data for the success screen
+  const [submittedData, setSubmittedData] = useState({
+    fullName: '',
+    email: '',
+    serviceName: '',
+  });
+
+  const getServiceLabel = (slug: string) => {
+    if (slug === 'full-growth-partnership') return 'Full Growth Partnership (All Services)';
+    const found = detailedServices.find((s) => s.slug === slug);
+    return found ? found.title : slug || 'General Inquiry';
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Optional: reset after 6 seconds or keep success badge
+    setErrorMessage('');
+
+    // If botcheck is checked, silent drop (bot detected)
+    if (botcheck) {
+      setSubmitStatus('success');
+      return;
+    }
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+    if (!accessKey || accessKey === 'your_web3forms_access_key_here') {
+      setSubmitStatus('error');
+      setErrorMessage(
+        'Web3Forms Access Key is missing or not set in .env file. Please add your key to VITE_WEB3FORMS_ACCESS_KEY, or email Apexcale786@gmail.com directly.'
+      );
+      return;
+    }
+
+    setIsSubmitting(true);
+    const selectedServiceLabel = getServiceLabel(formData.service);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New Client Strategy Call Request: ${formData.fullName} (${formData.company || 'Private'})`,
+          from_name: 'Apexcale Website Inquiry',
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone || 'Not provided',
+          company: formData.company || 'Not provided',
+          service: selectedServiceLabel,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmittedData({
+          fullName: formData.fullName,
+          email: formData.email,
+          serviceName: selectedServiceLabel,
+        });
+        setSubmitStatus('success');
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          company: '',
+          service: defaultService || '',
+          message: '',
+        });
+      } else {
+        setSubmitStatus('error');
+        setErrorMessage(
+          result.message || 'Unable to send your request right now. Please try again or email us directly.'
+        );
+      }
+    } catch {
+      setSubmitStatus('error');
+      setErrorMessage(
+        'A network error occurred while sending your request. Please check your connection or contact Apexcale786@gmail.com directly.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -123,36 +218,55 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
           <div className="fsc-right">
             <Reveal variant="up" delay={180}>
               <div className="fsc-form-card">
-                {submitted ? (
+                {submitStatus === 'success' ? (
                   <div className="fsc-success-box">
                     <div className="fsc-success-ico">
-                      <CheckCircleIcon size={42} />
+                      <CheckCircleIcon size={46} />
                     </div>
-                    <h3>Thank You for Reaching Out!</h3>
+                    <h3>Thank You, {submittedData.fullName || 'Valued Client'}!</h3>
                     <p>
-                      We have received your request. A senior Apexcale strategist will review your
-                      details and reach out within 24 hours to schedule your free strategy call.
+                      Your request has been successfully sent to the Apexcale team (
+                      <strong>Apexcale786@gmail.com</strong>). A senior strategist will review your
+                      details and reach out within 24 hours.
                     </p>
+
+                    {submittedData.serviceName && (
+                      <div className="fsc-success-details">
+                        <div>
+                          <span className="label">Requested Service:</span>
+                          <span className="val">{submittedData.serviceName}</span>
+                        </div>
+                        <div>
+                          <span className="label">Your Email:</span>
+                          <span className="val">{submittedData.email}</span>
+                        </div>
+                      </div>
+                    )}
+
                     <button
                       type="button"
                       className="fsc-btn-reset"
                       onClick={() => {
-                        setSubmitted(false);
-                        setFormData({
-                          fullName: '',
-                          email: '',
-                          phone: '',
-                          company: '',
-                          service: '',
-                          message: '',
-                        });
+                        setSubmitStatus('idle');
+                        setErrorMessage('');
                       }}
                     >
-                      Send Another Message
+                      Send Another Request
                     </button>
                   </div>
                 ) : (
                   <form className="fsc-form" onSubmit={handleSubmit}>
+                    {/* Honeypot anti-spam field */}
+                    <input
+                      type="checkbox"
+                      name="botcheck"
+                      style={{ display: 'none' }}
+                      checked={botcheck}
+                      onChange={(e) => setBotcheck(e.target.checked)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+
                     <div className="fsc-form-row">
                       <div className="fsc-form-group">
                         <label htmlFor="fsc-name">Full Name *</label>
@@ -160,6 +274,7 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
                           id="fsc-name"
                           type="text"
                           required
+                          disabled={isSubmitting}
                           placeholder="John Smith"
                           value={formData.fullName}
                           onChange={(e) =>
@@ -174,6 +289,7 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
                           id="fsc-email"
                           type="email"
                           required
+                          disabled={isSubmitting}
                           placeholder="john@company.com"
                           value={formData.email}
                           onChange={(e) =>
@@ -189,6 +305,7 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
                         <input
                           id="fsc-phone"
                           type="tel"
+                          disabled={isSubmitting}
                           placeholder="0348 5035847"
                           value={formData.phone}
                           onChange={(e) =>
@@ -202,6 +319,7 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
                         <input
                           id="fsc-company"
                           type="text"
+                          disabled={isSubmitting}
                           placeholder="Your Company"
                           value={formData.company}
                           onChange={(e) =>
@@ -216,6 +334,7 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
                       <select
                         id="fsc-service"
                         required
+                        disabled={isSubmitting}
                         value={formData.service}
                         onChange={(e) =>
                           setFormData({ ...formData, service: e.target.value })
@@ -229,7 +348,9 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
                             {s.title}
                           </option>
                         ))}
-                        <option value="full-growth-partnership">Full Growth Partnership (All Services)</option>
+                        <option value="full-growth-partnership">
+                          Full Growth Partnership (All Services)
+                        </option>
                       </select>
                     </div>
 
@@ -238,6 +359,7 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
                       <textarea
                         id="fsc-message"
                         required
+                        disabled={isSubmitting}
                         rows={4}
                         placeholder="Tell us about your Amazon business and goals..."
                         value={formData.message}
@@ -247,9 +369,32 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
                       />
                     </div>
 
-                    <button type="submit" className="fsc-submit-btn">
-                      <span>Send Message</span>
-                      <SendIcon size={18} />
+                    {submitStatus === 'error' && errorMessage && (
+                      <div className="fsc-error-box">
+                        <AlertCircleIcon size={20} />
+                        <div>
+                          <strong>Submission Alert: </strong>
+                          {errorMessage}
+                        </div>
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      className="fsc-submit-btn"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <SpinnerIcon size={18} />
+                          <span>Sending Request...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Send Message</span>
+                          <SendIcon size={18} />
+                        </>
+                      )}
                     </button>
                   </form>
                 )}
@@ -261,4 +406,5 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
     </section>
   );
 }
+
 
