@@ -52,7 +52,7 @@ export function Results() {
     >
       <div className="container">
         {/* Section Header */}
-        <div className="section-head center">
+        <div className="section-head">
           <Reveal variant="up">
             <span className="eyebrow">Results That Matter</span>
           </Reveal>
@@ -62,7 +62,7 @@ export function Results() {
             </h2>
           </Reveal>
           <Reveal variant="up" delay={100}>
-            <p className="lead" style={{ maxWidth: 660, marginInline: 'auto' }}>
+            <p className="lead" style={{ maxWidth: 660 }}>
               A unified marketplace ecosystem engineered for high-margin scaling, 24/7 account protection, and compounding organic velocity.
             </p>
           </Reveal>

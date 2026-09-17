@@ -39,10 +39,9 @@ export function CaseStudies() {
     <section className="section case-studies-section" id="case-studies">
       <div className="container">
         {/* Section Header */}
-        <div className="section-head center">
+        <div className="section-head">
           <Reveal variant="up">
             <span className="eyebrow">
-              <span className="cs-eyebrow-dot" />
               Verified Case Studies
             </span>
           </Reveal>
@@ -52,7 +51,7 @@ export function CaseStudies() {
             </h2>
           </Reveal>
           <Reveal variant="up" delay={100}>
-            <p className="lead" style={{ maxWidth: 740, marginInline: 'auto' }}>
+            <p className="lead" style={{ maxWidth: 740 }}>
               Inspect the exact data, strategy blueprints, and compounding financial outcomes from real marketplace accounts engineered and scaled by Apexcale.
             </p>
           </Reveal>

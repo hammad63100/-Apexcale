@@ -17,7 +17,7 @@ export function Testimonials() {
       style={{ background: 'linear-gradient(180deg, transparent, rgba(255,255,255,.6), transparent)' }}
     >
       <div className="container">
-        <div className="section-head center">
+        <div className="section-head">
           <Reveal variant="up">
             <span className="eyebrow">Reviews</span>
           </Reveal>

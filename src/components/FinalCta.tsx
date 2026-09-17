@@ -123,7 +123,7 @@ export function FinalCta({ defaultService }: FinalCtaProps = {}) {
     <section className="section fsc-section" id="cta">
       <div className="container">
         {/* Section Header */}
-        <div className="section-head center" style={{ maxWidth: 860, marginInline: 'auto' }}>
+        <div className="section-head" style={{ maxWidth: 860 }}>
           <Reveal variant="up">
             <span className="eyebrow">Free Strategy Call</span>
           </Reveal>

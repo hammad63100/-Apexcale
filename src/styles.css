@@ -417,11 +417,17 @@ ul {
   border-bottom: 1px solid transparent;
 }
 
+.nav .container {
+  width: min(1480px, 100% - 40px);
+  max-width: 1480px;
+}
+
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
+  width: 100%;
 }
 
 .logo {
@@ -432,6 +438,7 @@ ul {
   font-size: 1.42rem;
   letter-spacing: -.03em;
   color: var(--navy-900);
+  flex-shrink: 0;
 }
 
 .logo-mark {
@@ -472,23 +479,25 @@ ul {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: clamp(2px, 0.4vw, 8px);
+  flex-shrink: 1;
 }
 
 .nav-links a {
   position: relative;
-  padding: 10px 15px;
+  padding: 8px 11px;
   font-weight: 600;
-  font-size: .93rem;
+  font-size: .89rem;
   color: var(--navy-800);
+  white-space: nowrap;
   transition: color .3s ease;
 }
 
 .nav-links a::after {
   content: "";
   position: absolute;
-  left: 15px;
-  right: 15px;
+  left: 11px;
+  right: 11px;
   bottom: 4px;
   height: 2px;
   border-radius: 2px;
@@ -512,7 +521,35 @@ ul {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
+
+.nav-cta .btn {
+  white-space: nowrap;
+  padding: 9px 18px;
+  font-size: .88rem;
+}
+
+@media (max-width: 1240px) {
+  .nav .container {
+    width: min(100%, 100% - 24px);
+  }
+
+  .nav-links {
+    gap: 2px;
+  }
+
+  .nav-links a {
+    padding: 6px 8px;
+    font-size: .83rem;
+  }
+
+  .nav-cta .btn {
+    padding: 8px 14px;
+    font-size: .83rem;
+  }
+}
+
 
 /* scrolled state */
 .nav.scrolled {
@@ -1705,15 +1742,11 @@ ul {
 }
 
 .why-section .eyebrow {
-  color: #0a58f6;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(255, 255, 255, 1);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-  font-weight: 800;
+  color: #ffffff;
 }
 
 .why-section .eyebrow::before {
-  background: #ff6b00;
+  background: var(--grad);
 }
 
 .why-section .h2 {
@@ -2175,28 +2208,11 @@ ul {
 }
 
 .results-section .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #ffffff;
-  color: #ea580c;
-  font-weight: 800;
-  font-size: .78rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  padding: 6px 16px;
-  border-radius: 999px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  margin-bottom: 20px;
+  color: #ffffff;
 }
 
 .results-section .eyebrow::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ea580c;
+  background: var(--grad);
 }
 
 .results-section .h2 {
@@ -3016,15 +3032,11 @@ ul {
 }
 
 .fsc-section .eyebrow {
-  color: #0a58f6;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(255, 255, 255, 1);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-  font-weight: 800;
+  color: #ffffff;
 }
 
 .fsc-section .eyebrow::before {
-  background: #ff6b00;
+  background: var(--grad);
 }
 
 .fsc-section .h2 {
@@ -3633,8 +3645,7 @@ ul {
   }
 }
 
-@media (max-width: 960px) {
-
+@media (max-width: 1040px) {
   .nav-links,
   .nav-cta .btn {
     display: none;
@@ -3643,6 +3654,10 @@ ul {
   .nav-toggle {
     display: inline-flex;
   }
+}
+
+@media (max-width: 960px) {
+
 
   .hero-inner {
     grid-template-columns: 1fr;
@@ -5145,27 +5160,11 @@ section[id] {
 }
 
 .case-studies-section .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(10, 88, 246, 0.08);
-  color: var(--primary);
-  font-weight: 800;
-  font-size: .78rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  padding: 6px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(10, 88, 246, 0.2);
-  margin-bottom: 20px;
+  color: var(--accent);
 }
 
-.cs-eyebrow-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #ff6000;
-  box-shadow: 0 0 8px rgba(255, 96, 0, 0.85);
+.case-studies-section .eyebrow::before {
+  background: var(--grad);
 }
 
 .case-studies-section .h2 {
@@ -5191,7 +5190,7 @@ section[id] {
 .cs-filter-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 36px;

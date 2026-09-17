@@ -14,7 +14,7 @@ export function Services() {
   return (
     <section className="section" id="services">
       <div className="container">
-        <div className="section-head center">
+        <div className="section-head">
           <Reveal variant="up">
             <span className="eyebrow">Our Services</span>
           </Reveal>
@@ -24,7 +24,7 @@ export function Services() {
             </h2>
           </Reveal>
           <Reveal variant="up" delay={100}>
-            <p className="lead" style={{ maxWidth: 740, marginInline: 'auto' }}>
+            <p className="lead" style={{ maxWidth: 740 }}>
               From data-backed product validation and patent-proof brand defense to high-converting listings and profit-driven PPC advertising — we engineer every facet of your Amazon compounding growth.
             </p>
           </Reveal>
